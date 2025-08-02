@@ -1,8 +1,8 @@
 # PRD: Pydantic.ai Slack Bot
 
-**Version:** 1.1
+**Version:** 1.2
 
-**Date:** 2025-07-27
+**Date:** 2025-08-02
 
 ## 1. Overview
 
@@ -12,7 +12,7 @@ This document outlines the requirements for a Slack bot that integrates with a L
 
 The primary goal is to create a simple, functional Slack bot that can be mentioned by users to ask questions or give commands to an LLM such as OpenAI or Gemini. This provides a foundation for more complex interactions and integrations with other services in the future.
 
-## 3. Core Features
+## 3. Core Features (MVP)
 
 ### 3.1. Slack Integration
 
@@ -58,19 +58,22 @@ The primary goal is to create a simple, functional Slack bot that can be mention
 -   **Core Framework:** `pydantic.ai`
 -   **Slack Integration:** `slack-bolt`
 -   **LLM:** Google Gemini (via `pydantic.ai`'s `google-gla` provider)
--   **Deployment:** The bot is run as a single process from the command line.
+-   **Deployment:** The bot is run as a single process from the command line or as a Docker container.
 
-## 5. Out of Scope for MVP
+## 5. Roadmap
 
--   **MCP Integration:** There will be no connection to or interaction with any MCPs (Mission Control Platforms).
--   **Structured Output:** The bot will only handle plain text responses, not structured data (e.g., Pydantic models, JSON).
--   **Advanced Tools:** The `pydantic.ai` agent will not yet use any function tools.
--   **Containerization:** Makes sense to containerize it, but we'll do that later.
+### 5.1. Completed
 
-## 6. Future Enhancements (Post-MVP)
+-   **MVP:** Core functionality for Slack interaction and LLM responses.
+-   **Containerization:** A Dockerfile is available for building and deploying the bot as a container.
 
--   **MCP Integration:** Develop a mechanism for the bot to act as a router, sending specific queries to different MCPs running locally. This will likely involve using `pydantic.ai`'s structured output and dependency injection features.
+### 5.2. Next Up
+
+-   **MCP Tool Use:** Integrate with Model Context Protocol (MCPs) by implementing `pydantic.ai` tool use. This will allow the bot to perform actions by calling functions based on user requests. This will likely involve using `pydantic.ai`'s structured output and dependency injection features.
+
+### 5.3. Future Ideas
+
 -   **Interactive Components:** Add Slack buttons or menus for common commands.
 -   **Direct Messages:** Allow users to interact with the bot in a DM channel.
 -   **Advanced History Management:** Implement more sophisticated history controls, such as summarization or a sliding window, to manage token limits in long conversations.
--   **Containerization:** Dockerfile with build instruction will simplify for others and reduce issues with dependencies.
+-   **Structured Output:** Expand beyond plain text to handle structured data (e.g., Pydantic models, JSON) for more complex responses.
