@@ -72,20 +72,5 @@ def start_slack_bot():
     handler.start()
 
 if __name__ == "__main__":
-    # Check for any existing bot processes
-    try:
-        import psutil
-        current_pid = os.getpid()
-        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
-            if proc.info['pid'] != current_pid and 'python' in proc.info['name']:
-                cmdline = ' '.join(proc.info['cmdline'] or [])
-                if 'slack_bot.py' in cmdline:
-                    logger.warning(f"Another slack_bot.py process detected: PID {proc.info['pid']}")
-                    print(f"WARNING: Another slack_bot.py process might be running (PID {proc.info['pid']})")
-    except ImportError:
-        logger.info("psutil not installed, skipping process check")
-    except Exception as e:
-        logger.warning(f"Could not check for existing processes: {e}")
-
     # Start the Slack bot
     start_slack_bot()

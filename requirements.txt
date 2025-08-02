@@ -1,5 +1,3 @@
 pydantic-ai
 slack-bolt
-boto3
 uv
-psutil

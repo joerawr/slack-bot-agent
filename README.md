@@ -79,7 +79,7 @@ docker logs -f my-slack-bot
 -   `slack_message_handler.py`: Handles incoming Slack mentions, processes the request, and sends the response.
 -   `slack_agent.py`: Contains the core LLM agent logic, using `pydantic.ai` to interact with the language model.
 -   `logger_config.py`: Configures console logging for the application.
--   `history/`: Directory where conversation history is stored as JSON files, one per channel. Note: This directory is ephemeral and will be lost if the container is removed or restarted.
+-   `history/`: Directory where conversation history is stored as JSON files, one per channel. Note: This directory is ephemeral and will be lost when the container is removed or restarted.
 -   `Dockerfile`: Defines the instructions for building the Docker image.
 -   `requirements.txt`: Lists the Python dependencies.
 -   `.dockerignore`: Specifies files to exclude from the Docker build.
