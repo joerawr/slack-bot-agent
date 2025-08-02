@@ -6,7 +6,7 @@ import os
 from logger_config import setup_logger
 
 # Set up logging
-logger = setup_logger('slack_agent', 'logs/slack_agent.log')
+logger = setup_logger('slack_agent')
 
 def run_agent(prompt: str, history_file: str = None):
     """
@@ -38,7 +38,7 @@ def run_agent(prompt: str, history_file: str = None):
     except Exception as e:
         logger.error(f"Agent execution failed: {e}", exc_info=True)
         # Also print to stderr so the calling process can capture it
-        print(f"Error: Agent execution failed. Check logs/slack_agent.log for details.", file=sys.stderr)
+        print(f"Error: Agent execution failed. See logs for details.", file=sys.stderr)
         sys.exit(1)
 
 def main():

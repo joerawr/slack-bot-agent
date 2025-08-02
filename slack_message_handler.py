@@ -12,7 +12,7 @@ from slack_message_formatter import format_for_slack
 from logger_config import setup_logger
 
 # Set up logging
-logger = setup_logger('slack_message_handler', 'logs/slack_message_handler.log')
+logger = setup_logger('slack_message_handler')
 
 def extract_request(text: str) -> str:
     """
