@@ -1,0 +1,14 @@
+# Git
+.git
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# Other
+.DS_Store
