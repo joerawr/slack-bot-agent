@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: slack-bot-history
+  namespace: bots
+spec:
+  accessModes: ["ReadWriteMany"]   # requires RWX storage class
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: longhorn       # change if your RWX class is named differently

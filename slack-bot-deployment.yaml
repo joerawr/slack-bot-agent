@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-bot
+  namespace: bots
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: slack-bot
+  template:
+    metadata:
+      labels:
+        app: slack-bot
+    spec:
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: app
+          image: ghcr.io/joerawr/slack-bot-agent:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SLACK_BOT_TOKEN
+              valueFrom: { secretKeyRef: { name: slack-bot-secrets, key: SLACK_BOT_TOKEN } }
+            - name: SLACK_APP_TOKEN
+              valueFrom: { secretKeyRef: { name: slack-bot-secrets, key: SLACK_APP_TOKEN } }
+            - name: GEMINI_API_KEY
+              valueFrom: { secretKeyRef: { name: slack-bot-secrets, key: GEMINI_API_KEY } }
+            - name: OPENAI_API_KEY
+              valueFrom: { secretKeyRef: { name: slack-bot-secrets, key: OPENAI_API_KEY } }
+          volumeMounts:
+            - name: history
+              mountPath: /app/history
+          startupProbe:
+            exec:
+              command: ["/bin/sh", "-c", "kill -0 1"]
+            failureThreshold: 30
+            periodSeconds: 2
+          livenessProbe:
+            exec:
+              command: ["/bin/sh", "-c", "kill -0 1"]
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests: { cpu: "50m", memory: "128Mi" }
+            limits:   { cpu: "500m", memory: "512Mi" }
+      volumes:
+        - name: history
+          persistentVolumeClaim:
+            claimName: slack-bot-history
